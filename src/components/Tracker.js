@@ -1,13 +1,11 @@
 import React from 'react';
-import Remarkable from 'remarkable';
+import Firebase from './firebase';
 
 class Tracker extends React.Component {
     constructor(props) {
         super(props);
-        this.handleWinChange = this.handleWinChange.bind(this);
-        this.handleLossChange = this.handleLossChange.bind(this);
-        this.handleSrChange = this.handleSrChange.bind(this);
-        this.handleDrawChange = this.handleDrawChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+
         this.state = { 
             wins: '0',
             losses: '0',
@@ -16,40 +14,37 @@ class Tracker extends React.Component {
         };
     }
 
-    handleWinChange(e) {
-        this.setState({ wins: e.target.value });
+    writeUserData = () => {
+    }
+      
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+
+        const item = {
+            wins: this.state.wins,
+            losses: this.state.losses,
+            draws: this.state.draws,
+            sr: this.state.sr
+        }
+
+
+        this.writeUserData();
+    }
+    componentDidMount() {
+        Firebase.users().on('value', snapshot => {
+            const usersObject = snapshot.val();
+    
+            const usersList = Object.keys(usersObject).map(key => ({
+                ...usersObject[key],
+                uid: key,
+            }));
+        });
     }
 
-    handleLossChange(e) {
-        this.setState({ losses: e.target.value });
-    }
-
-    handleSrChange(e) {
-        this.setState({ sr: e.target.value });
-    }
-
-    handleDrawChange(e) {
-        this.setState({ draws: e.target.value });
-    }
-
-    getRawMarkupWins() {
-        const md = new Remarkable();
-        return { __html: md.render(this.state.wins) };
-    }
-
-    getRawMarkupLosses() {
-        const md = new Remarkable();
-        return { __html: md.render(this.state.losses) };
-    }
-
-    getRawMarkupSr() {
-        const md = new Remarkable();
-        return { __html: md.render(this.state.sr) };
-    }
-
-    getRawMarkupDraws() {
-        const md = new Remarkable();
-        return { __html: md.render(this.state.draws) };
+    componentWillUnmount() {
+        Firebase.users().off();
     }
 
     render() {
@@ -60,12 +55,8 @@ class Tracker extends React.Component {
             </label>
             <textarea
                 id="wins"
-                onChange={this.handleWinChange}
-                defaultValue={this.state.wins}
-            />
-            <div
-                className=""
-                dangerouslySetInnerHTML={this.getRawMarkupWins()}
+                name="wins"
+                onChange={this.handleChange}
             />
 
             <label htmlFor="losses">
@@ -73,12 +64,8 @@ class Tracker extends React.Component {
             </label>
             <textarea
                 id="losses"
-                onChange={this.handleLossChange}
-                defaultValue={this.state.losses}
-            />
-            <div
-                className=""
-                dangerouslySetInnerHTML={this.getRawMarkupLosses()}
+                name="losses"
+                onChange={this.handleChange}
             />
 
             <label htmlFor="draws">
@@ -86,12 +73,8 @@ class Tracker extends React.Component {
             </label>
             <textarea
                 id="draws"
-                onChange={this.handleDrawChange}
-                defaultValue={this.state.draws}
-            />
-            <div
-                className=""
-                dangerouslySetInnerHTML={this.getRawMarkupDraws()}
+                name="draws"
+                onChange={this.handleChange}
             />
 
             <label htmlFor="sr">
@@ -99,13 +82,10 @@ class Tracker extends React.Component {
             </label>
             <textarea
                 id="sr"
-                onChange={this.handleSrChange}
-                defaultValue={this.state.sr}
+                name="sr"
+                onChange={this.handleChange}
             />
-            <div
-                className=""
-                dangerouslySetInnerHTML={this.getRawMarkupSr()}
-            />
+
         </div>
         );
     }

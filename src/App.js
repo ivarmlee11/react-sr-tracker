@@ -4,11 +4,6 @@ import Tracker from './components/Tracker';
 import Display from './components/Display';
 
 class App extends React.Component {
-
-  constructor(props){
-    super(props);
-  }
-
   render() {
     return (
       <div className="App">
