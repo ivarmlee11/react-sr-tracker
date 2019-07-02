@@ -14,48 +14,35 @@ class Display extends React.Component {
     }
 
     componentDidMount() {
-
-        this.props.firebase.users().on('value', snapshot => {
-            const usersObject = snapshot.val();
-
-            const usersList = Object.keys(usersObject).map(key => ({
-                ...usersObject[key],
-                uid: key,
-            }));
-
-            console.log('user list');
-            console.log(usersList);
-        });
     }
     
     componentWillUnmount() {
-        this.props.firebase.users().off();
     }
 
     render() {
         return (
-        <div className="display">
-            <label htmlFor="losses">
-                Losses
-            </label>
-            <textarea
-                id="losses"
-            />
+            <div className="display">
+                <label htmlFor="losses">
+                    Losses
+                </label>
+                <textarea
+                    id="losses"
+                />
 
-            <label htmlFor="draws">
-                Draws
-            </label>
-            <textarea
-                id="draws"
-            />
+                <label htmlFor="draws">
+                    Draws
+                </label>
+                <textarea
+                    id="draws"
+                />
 
-            <label htmlFor="sr">
-                SR
-            </label>
-            <textarea
-                id="sr"
-            />
-        </div>
+                <label htmlFor="sr">
+                    SR
+                </label>
+                <textarea
+                    id="sr"
+                />
+            </div>
         );
     }
 }

@@ -1,10 +1,11 @@
 import React from 'react';
-import Firebase from './firebase';
+import { db } from "./firebase";
 
 class Tracker extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
 
         this.state = { 
             wins: '0',
@@ -15,36 +16,35 @@ class Tracker extends React.Component {
     }
 
     writeUserData = () => {
+        const uid = new Date().getTime();
+        s
+        const data = {
+            ...this.state,
+            uid
+        };
+
+        db.collection("users")
+        .doc(data.uid.toString())
+        .set(data)
+        .then(() => {
+            console.log('data added, check firestore');
+        })
+        .catch(error => {
+            console.log('error ', error);
+        // this.setState({ isSubmitting: false });
+        });
+
     }
       
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value
         });
+    }
 
-        const item = {
-            wins: this.state.wins,
-            losses: this.state.losses,
-            draws: this.state.draws,
-            sr: this.state.sr
-        }
-
-
+    handleClick(e) {
+        e.preventDefault();
         this.writeUserData();
-    }
-    componentDidMount() {
-        Firebase.users().on('value', snapshot => {
-            const usersObject = snapshot.val();
-    
-            const usersList = Object.keys(usersObject).map(key => ({
-                ...usersObject[key],
-                uid: key,
-            }));
-        });
-    }
-
-    componentWillUnmount() {
-        Firebase.users().off();
     }
 
     render() {
@@ -85,7 +85,12 @@ class Tracker extends React.Component {
                 name="sr"
                 onChange={this.handleChange}
             />
-
+            <button
+                type="submit"
+                onClick={this.handleClick}
+            >
+                Submit
+            </button>
         </div>
         );
     }
