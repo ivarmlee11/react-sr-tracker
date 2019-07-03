@@ -17,11 +17,10 @@ class Tracker extends React.Component {
 
     writeUserData = () => {
         const uid = new Date().getTime();
-        s
-        const data = {
-            ...this.state,
-            uid
-        };
+
+        const data = { uid };
+
+        this.props.callback(data);
 
         db.collection("users")
         .doc(data.uid.toString())
@@ -31,7 +30,7 @@ class Tracker extends React.Component {
         })
         .catch(error => {
             console.log('error ', error);
-        // this.setState({ isSubmitting: false });
+            // this.setState({ isSubmitting: false });
         });
 
     }
@@ -42,8 +41,7 @@ class Tracker extends React.Component {
         });
     }
 
-    handleClick(e) {
-        e.preventDefault();
+    handleClick() {
         this.writeUserData();
     }
 
