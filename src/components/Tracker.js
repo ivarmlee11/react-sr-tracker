@@ -20,17 +20,16 @@ class Tracker extends React.Component {
 
         const data = { uid };
 
-        this.props.callback(data);
+        this.props.updateUID(data);
 
         db.collection("users")
         .doc(data.uid.toString())
-        .set(data)
-        .then(() => {
-            console.log('data added, check firestore');
+        .set({
+            uid: data.uid,
+            ...this.state
         })
         .catch(error => {
             console.log('error ', error);
-            // this.setState({ isSubmitting: false });
         });
 
     }
@@ -48,6 +47,15 @@ class Tracker extends React.Component {
     render() {
         return (
         <div className="tracker">
+            <label htmlFor="name">
+                Name
+            </label>
+            <textarea
+                id="name"
+                name="name"
+                onChange={this.handleChange}
+            />
+
             <label htmlFor="wins">
                 Wins
             </label>

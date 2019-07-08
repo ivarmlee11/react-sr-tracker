@@ -1,4 +1,5 @@
 import React from 'react';
+import { db } from "./firebase";
 
 class Display extends React.Component {
     constructor(props) {
@@ -14,12 +15,14 @@ class Display extends React.Component {
 
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (!prevProps.uid.length && this.props.uid.length) {
-          //Your code
-          console.log(prevProps)
-        }
-      }
+    componentDidMount() {
+        db.collection("users").doc("users")
+        .onSnapshot(function(doc) {
+            var source = doc.metadata.hasPendingWrites ? "Local" : "Server";
+            console.log(source, " data: ", doc.data());
+        });
+    
+    }
 
     render() {
         return (
