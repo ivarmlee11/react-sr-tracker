@@ -4,21 +4,8 @@ import Tracker from './components/tracker';
 import Display from './components/display';
 
 class App extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = { 
-			uid: '',
-		};
-
-	}
-
-	fromInput(data) {
-		this.setState({
-			uid: data.uid
-		});
-	}
 	render() {
+		let uniqueName = process.env.REACT_APP_OW_ID
 		return (
 			<div className="App">
 				<Router>
@@ -26,15 +13,12 @@ class App extends React.Component {
 						exact
 						path="/"
 						render={() => (
-							<Tracker
-								uid={this.state.uid}
-								updateUID={uid => this.fromInput(uid)}
-							/>
+							<Tracker name={uniqueName}/>
 						)}
 					/>
 					<Route
 						path="/display"
-						render={() => <Display uid={this.state.uid}/>}
+						render={() => <Display name={uniqueName}/>}
 					/>
 				</Router>
 

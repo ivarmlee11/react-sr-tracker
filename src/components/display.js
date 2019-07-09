@@ -1,77 +1,63 @@
 import React from 'react';
 import { db } from "./firebase";
+import styled from 'styled-components';
+
+const StatDisplay = styled.div`
+    font-size: 1.5em;
+    text-align: center;
+    color: palevioletred;
+    background-color: #FFFDD0;
+    margin: 0;
+    padding: 0;
+`;
 
 class Display extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props)
-        this.state = { 
+        this.state = {
             wins: '0',
             losses: '0',
             draws: '0',
-            sr: '0',
-            uid: '',
+            sr: '0'
         };
 
     }
 
     componentDidMount() {
-        db.collection("users").doc("users")
-        .onSnapshot(function(doc) {
-            var source = doc.metadata.hasPendingWrites ? "Local" : "Server";
-            console.log(source, " data: ", doc.data());
+        this.unsubscribe = db.collection('users').doc(this.props.name)
+        .onSnapshot((doc) => {
+            if(doc.data()) {
+                let { wins, losses, draws, sr } = doc.data();
+                this.setState({
+                    wins,
+                    losses,
+                    draws,
+                    sr
+                });
+            }
         });
-    
     }
+
+    componentWillUnmount = () => {
+        this.unsubscribe && this.unsubscribe();
+    };
 
     render() {
         return (
-            <div className="display">
-                uid {this.state.uid} uid {this.props.uid}
-                {/* <label htmlFor="wins">
-                    Wins
-                </label>
-                <div
-                    id="wins"
-                >
-                    {
-                        this.state.wins
-                    }
+            <StatDisplay>
+                <div>
+                    Wins: {this.state.wins}
                 </div>
-
-                <label htmlFor="losses">
-                    Losses
-                </label>
-                <div
-                    id="losses"
-                >
-                    {
-                        this.state.losses
-                    }
+                <div>
+                   Losses: {this.state.losses}
                 </div>
-
-                <label htmlFor="draws">
-                    Draws
-                </label>
-                <div
-                    id="draws"
-                >
-                    {
-                        this.state.draws
-                    }
+                <div>
+                    Draws: {this.state.draws}
                 </div>
-
-                <label htmlFor="sr">
-                    SR
-                </label>
-                <div
-                    id="sr"
-                >
-                    {
-                        this.state.sr
-                    }
-                </div> */}
-            </div>
+                <div>
+                    SR: {this.state.sr}
+                </div>
+            </StatDisplay>
         );
     }
 }

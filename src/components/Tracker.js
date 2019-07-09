@@ -1,5 +1,49 @@
 import React from 'react';
 import { db } from "./firebase";
+import styled from 'styled-components';
+
+const FormDisplay = styled.div`
+    font-size: 1.5em;
+    display: flex;
+    width: 100px;
+    flex-direction: column;
+    color: palevioletred;
+    background-color: #FFFDD0;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+`;
+
+const FormSection = styled.div`
+    max-width: 100px;
+`;
+
+const TextInput = styled.input`
+    max-width: 100px;
+    color: palevioletred;
+    border: 3px solid;
+    height: 20px;
+    background-color: #FFFDD0;
+    margin-bottom: 15px;
+`;
+
+const StyledButton = styled.button`
+    width: 106px;
+    color: palevioletred;
+    height: 30px;
+    border: 3px solid;
+    background-color: #FFFDD0;
+    margin-bottom: 35px;
+    margin-top: 20px;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    }
+    &:active {
+        font-weight: bold;
+        border: 4px solid;
+    }
+`;
 
 class Tracker extends React.Component {
     constructor(props) {
@@ -7,7 +51,7 @@ class Tracker extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
 
-        this.state = { 
+        this.state = {
             wins: '0',
             losses: '0',
             draws: '0',
@@ -16,16 +60,11 @@ class Tracker extends React.Component {
     }
 
     writeUserData = () => {
-        const uid = new Date().getTime();
-
-        const data = { uid };
-
-        this.props.updateUID(data);
 
         db.collection("users")
-        .doc(data.uid.toString())
+        .doc(this.props.name)
         .set({
-            uid: data.uid,
+            username: this.props.name,
             ...this.state
         })
         .catch(error => {
@@ -46,58 +85,56 @@ class Tracker extends React.Component {
 
     render() {
         return (
-        <div className="tracker">
-            <label htmlFor="name">
-                Name
-            </label>
-            <textarea
-                id="name"
-                name="name"
-                onChange={this.handleChange}
-            />
-
-            <label htmlFor="wins">
-                Wins
-            </label>
-            <textarea
-                id="wins"
-                name="wins"
-                onChange={this.handleChange}
-            />
-
-            <label htmlFor="losses">
-                Losses
-            </label>
-            <textarea
-                id="losses"
-                name="losses"
-                onChange={this.handleChange}
-            />
-
-            <label htmlFor="draws">
-                Draws
-            </label>
-            <textarea
-                id="draws"
-                name="draws"
-                onChange={this.handleChange}
-            />
-
-            <label htmlFor="sr">
-                SR
-            </label>
-            <textarea
-                id="sr"
-                name="sr"
-                onChange={this.handleChange}
-            />
-            <button
-                type="submit"
-                onClick={this.handleClick}
-            >
-                Submit
-            </button>
-        </div>
+        <FormDisplay>
+            <FormSection>
+                <label htmlFor="wins">
+                    Wins
+                </label>
+                <TextInput
+                    id="wins"
+                    name="wins"
+                    onChange={this.handleChange}
+                />
+            </FormSection>
+            <FormSection>
+                <label htmlFor="losses">
+                    Losses
+                </label>
+                <TextInput
+                    id="losses"
+                    name="losses"
+                    onChange={this.handleChange}
+                />
+            </FormSection>
+            <FormSection>
+                <label htmlFor="draws">
+                    Draws
+                </label>
+                <TextInput
+                    id="draws"
+                    name="draws"
+                    onChange={this.handleChange}
+                />
+            </FormSection>
+            <FormSection>
+                <label htmlFor="sr">
+                    SR
+                </label>
+                <TextInput
+                    id="sr"
+                    name="sr"
+                    onChange={this.handleChange}
+                />
+            </FormSection>
+            <FormSection>
+                <StyledButton
+                    type="submit"
+                    onClick={this.handleClick}
+                >
+                    Submit
+                </StyledButton>
+            </FormSection>
+        </FormDisplay>
         );
     }
 }
