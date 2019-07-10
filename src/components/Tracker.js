@@ -21,6 +21,7 @@ const FormSection = styled.div`
 const TextInput = styled.input`
     max-width: 100px;
     color: palevioletred;
+    padding: 2px;
     border: 3px solid;
     height: 20px;
     background-color: #FFFDD0;
