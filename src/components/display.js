@@ -23,7 +23,7 @@ class Display extends React.Component {
             losses: '0',
             draws: '0',
             sr: '0',
-            statsChanging: false
+            statsChanging: true
         };
 
     }
