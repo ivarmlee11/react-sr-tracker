@@ -2,6 +2,16 @@ import React from 'react';
 import { db } from "./firebase";
 import styled from 'styled-components';
 
+const Container = styled.div`
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 3px solid palevioletred;
+`;
+
 const FormDisplay = styled.div`
     font-size: 1.5em;
     display: flex;
@@ -86,56 +96,58 @@ class Tracker extends React.Component {
 
     render() {
         return (
-        <FormDisplay>
-            <FormSection>
-                <label htmlFor="wins">
-                    Wins
-                </label>
-                <TextInput
-                    id="wins"
-                    name="wins"
-                    onChange={this.handleChange}
-                />
-            </FormSection>
-            <FormSection>
-                <label htmlFor="losses">
-                    Losses
-                </label>
-                <TextInput
-                    id="losses"
-                    name="losses"
-                    onChange={this.handleChange}
-                />
-            </FormSection>
-            <FormSection>
-                <label htmlFor="draws">
-                    Draws
-                </label>
-                <TextInput
-                    id="draws"
-                    name="draws"
-                    onChange={this.handleChange}
-                />
-            </FormSection>
-            <FormSection>
-                <label htmlFor="sr">
-                    SR
-                </label>
-                <TextInput
-                    id="sr"
-                    name="sr"
-                    onChange={this.handleChange}
-                />
-            </FormSection>
-            <FormSection>
-                <StyledButton
-                    type="submit"
-                    onClick={this.handleClick}
-                >
-                    Submit
-                </StyledButton>
-            </FormSection>
-        </FormDisplay>
+            <Container>
+                <FormDisplay>
+                    <FormSection>
+                        <label htmlFor="wins">
+                            Wins
+                        </label>
+                        <TextInput
+                            id="wins"
+                            name="wins"
+                            onChange={this.handleChange}
+                        />
+                    </FormSection>
+                    <FormSection>
+                        <label htmlFor="losses">
+                            Losses
+                        </label>
+                        <TextInput
+                            id="losses"
+                            name="losses"
+                            onChange={this.handleChange}
+                        />
+                    </FormSection>
+                    <FormSection>
+                        <label htmlFor="draws">
+                            Draws
+                        </label>
+                        <TextInput
+                            id="draws"
+                            name="draws"
+                            onChange={this.handleChange}
+                        />
+                    </FormSection>
+                    <FormSection>
+                        <label htmlFor="sr">
+                            SR
+                        </label>
+                        <TextInput
+                            id="sr"
+                            name="sr"
+                            onChange={this.handleChange}
+                        />
+                    </FormSection>
+                    <FormSection>
+                        <StyledButton
+                            type="submit"
+                            onClick={this.handleClick}
+                        >
+                            Submit
+                        </StyledButton>
+                    </FormSection>
+                </FormDisplay>
+            </Container>
         );
     }
 }
