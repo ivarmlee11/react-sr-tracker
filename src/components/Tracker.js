@@ -15,6 +15,7 @@ const Container = styled.div`
 const FormDisplay = styled.div`
     font-size: 1.5em;
     display: flex;
+    font-weight: bold;
     width: 100px;
     flex-direction: column;
     color: palevioletred;
