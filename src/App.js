@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
-import Tracker from './components/tracker';
-import Display from './components/display';
+import Tracker from './components/Tracker';
+import Display from './components/Display';
 
 class App extends React.Component {
 	render() {
