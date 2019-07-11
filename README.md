@@ -1,3 +1,9 @@
+## SR Tracker
+
+Firebase powered web application that will eventually be integrated with Twitch extensions in some way.
+
+Right now this repo is for personal use but as this project evolves I'll be hosting this code somewhere and refactoring it quite a bit.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
