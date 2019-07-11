@@ -2,12 +2,23 @@ import React from 'react';
 import { db } from "./firebase";
 import styled from 'styled-components';
 
+const Container = styled.div`
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 3px solid palevioletred;
+`;
+
 const StatDisplay = styled.div`
     font-size: 1.5em;
     text-align: center;
     color: palevioletred;
+    font-weight: bold;
     background-color: #FFFDD0;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
 `;
 
@@ -57,28 +68,32 @@ class Display extends React.Component {
     render() {
         if (!this.state.statsChanging) {
             return (
-                <StatDisplay>
-                    <div>
-                        Wins: {this.state.wins}
-                    </div>
-                    <div>
-                       Losses: {this.state.losses}
-                    </div>
-                    <div>
-                        Draws: {this.state.draws}
-                    </div>
-                    <div>
-                        SR: {this.state.sr}
-                    </div>
-                </StatDisplay>
+                <Container>
+                    <StatDisplay>
+                        <div>
+                            Wins: {this.state.wins}
+                        </div>
+                        <div>
+                        Losses: {this.state.losses}
+                        </div>
+                        <div>
+                            Draws: {this.state.draws}
+                        </div>
+                        <div>
+                            SR: {this.state.sr}
+                        </div>
+                    </StatDisplay>
+                </Container>
             );
         } else {
             return (
-                <StatDisplay>
-                    <div>
-                        <StatDisplayImg src="./img/spin.gif"/>
-                    </div>
-                </StatDisplay>
+                <Container>
+                    <StatDisplay>
+                        <div>
+                            <StatDisplayImg src="./img/spin.gif"/>
+                        </div>
+                    </StatDisplay>
+                </Container>
             )
         }
     }
