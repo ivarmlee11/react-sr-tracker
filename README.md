@@ -1,6 +1,10 @@
 ## SR Tracker
 
-Firebase powered web application that will eventually be integrated with Twitch extensions in some way.
+`SR` is a ranking number that the game `Overwatch` uses. However, this web application could be used to track wins, losses, and ties for anything really.
+
+It uses Firebase and will eventually be integrated with Twitch extensions in some way.
+
+Currently this is just a form where the data is saved to a Firestore and uses React Router. It's main purpose right now is to be used as an overlay in streaming applications, (and later on I want to add more interactivity via Twitch extensions).
 
 Right now this repo is for personal use but as this project evolves I'll be hosting this code somewhere and refactoring it quite a bit.
 
@@ -23,6 +27,8 @@ REACT_APP_MESSAGING_SENDER_ID=
 Add this line as well, make the name a random string.
 
 ```REACT_APP_OW_ID=sdasdadd```
+
+Run the project with `npm start` and open your browser to `localhost:3000/tracker` and another window at `localhost:3000/display`.
 
 ## Available Scripts
 
