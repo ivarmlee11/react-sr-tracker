@@ -4,9 +4,7 @@
 
 It uses Firebase and will eventually be integrated with Twitch extensions in some way.
 
-Currently this is just a form where the data is saved to a Firestore and uses React Router. It's main purpose right now is to be used as an overlay in streaming applications, (and later on I want to add more interactivity via Twitch extensions).
-
-Right now this repo is for personal use but as this project evolves I'll be hosting this code somewhere and refactoring it quite a bit.
+Currently this is just a form where the data is saved to a Firestore and uses React Router. Its main purpose right now is to be used as an overlay in streaming applications, (and later on I want to add more interactivity via Twitch extensions).
 
 I think it works well because the Firebase instance is exportable.
 
