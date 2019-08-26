@@ -4,7 +4,25 @@ Firebase powered web application that will eventually be integrated with Twitch 
 
 Right now this repo is for personal use but as this project evolves I'll be hosting this code somewhere and refactoring it quite a bit.
 
+I think it works well because the Firebase instance is exportable.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## How it works
+
+Set up a Firebase Firestore account and get that running. Create a .env file in the root of the project with the following lines set to the credentials given to you when siging up.
+
+```
+REACT_APP_API_KEY=
+REACT_APP_AUTH_DOMAIN=
+REACT_APP_DATABASE_URL=
+REACT_APP_PROJECT_ID=
+REACT_APP_MESSAGING_SENDER_ID=
+```
+
+Add this line as well, make the name a random string.
+
+```REACT_APP_OW_ID=sdasdadd```
 
 ## Available Scripts
 
